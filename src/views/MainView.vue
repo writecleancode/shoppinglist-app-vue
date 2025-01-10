@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Header from '@/components/molecules/Header.vue';
+
 import { ref } from 'vue';
 import { useEditProduct } from '@/composables/useEditProduct';
 import { useChangeCategory } from '@/composables/useChangeCategory';
@@ -72,8 +74,9 @@ const { isCategoryPanelOpen, closeCategoryPanel } = useChangeCategory();
 
 <template>
 	<div class="main-view-wrapper">
-		<div :inert="isAddProductActive || isEditPanelOpen || isCategoryPanelOpen"></div>
-		Shopping List
+		<div :inert="isAddProductActive || isEditPanelOpen || isCategoryPanelOpen">
+            <Header />
+        </div>
 	</div>
 </template>
 
