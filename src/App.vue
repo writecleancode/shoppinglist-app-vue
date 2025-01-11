@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import MainView from './views/MainView.vue';
 
+import { useProductsProvider } from '@/providers/ProductsProvider';
 
+useProductsProvider();
 </script>
 
 <template>

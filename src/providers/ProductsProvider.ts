@@ -2,8 +2,9 @@ import { collection, deleteDoc, deleteField, doc, getDoc, getDocs, increment, se
 import { db } from '@/firebase';
 import { v4 as uuid } from 'uuid';
 import { ref } from 'vue';
+import { createProvider } from '@/utils/createProvider';
 
-export const useProducts = () => {
+const useProducts = () => {
 	const defaultProducts = ref([]);
 	const customProducts = ref([]);
 	const productsList = ref([]);
@@ -223,6 +224,9 @@ export const useProducts = () => {
 	};
 
 	return {
+		shoppingProgress,
 		removeBoughtProducts,
 	};
 };
+
+export const [useProductsProvider, useProductsContext] = createProvider('Products', useProducts);

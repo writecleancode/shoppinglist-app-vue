@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useProducts } from '@/composables/useProducts';
 import { ref } from 'vue';
+import { useProductsContext } from '@/providers/ProductsProvider';
 
 const isRemoveButtonVisible = ref(false);
-const { removeBoughtProducts } = useProducts();
+const { removeBoughtProducts } = useProductsContext();
 
 const handleRemoveButtonState = () => (isRemoveButtonVisible.value = !isRemoveButtonVisible.value);
 

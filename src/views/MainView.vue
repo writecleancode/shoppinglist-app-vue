@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Header from '@/components/molecules/Header.vue';
+import ProgressBar from '@/components/atoms/ProgressBar.vue';
 
 import { ref } from 'vue';
 import { useEditProduct } from '@/composables/useEditProduct';
@@ -75,8 +76,9 @@ const { isCategoryPanelOpen, closeCategoryPanel } = useChangeCategory();
 <template>
 	<div class="main-view-wrapper">
 		<div :inert="isAddProductActive || isEditPanelOpen || isCategoryPanelOpen">
-            <Header />
-        </div>
+			<Header />
+			<ProgressBar />
+		</div>
 	</div>
 </template>
 
