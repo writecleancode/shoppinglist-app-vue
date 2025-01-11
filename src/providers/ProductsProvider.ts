@@ -10,6 +10,12 @@ const useProducts = () => {
 	const productsList = ref([]);
 	const shoppingProgress = ref(0);
 
+	const setDefaultProducts = productsToSet => (defaultProducts.value = productsToSet);
+
+	const setCustomProducts = productsToSet => (customProducts.value = productsToSet);
+
+	const setProductsList = productsToSet => (productsList.value = productsToSet);
+
 	const countShoppingProgress = () => {
 		let productToBuy = 0;
 		let boughtProducts = 0;
@@ -224,7 +230,14 @@ const useProducts = () => {
 	};
 
 	return {
+		defaultProducts,
+		customProducts,
+		productsList,
 		shoppingProgress,
+		setDefaultProducts,
+		setCustomProducts,
+		setProductsList,
+		countShoppingProgress,
 		removeBoughtProducts,
 	};
 };

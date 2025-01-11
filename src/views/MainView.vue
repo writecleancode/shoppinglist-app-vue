@@ -3,12 +3,14 @@ import Header from '@/components/molecules/Header.vue';
 import ProgressBar from '@/components/atoms/ProgressBar.vue';
 
 import { ref } from 'vue';
+import { useProductsContext } from '@/providers/ProductsProvider';
 import { useEditProduct } from '@/composables/useEditProduct';
 import { useChangeCategory } from '@/composables/useChangeCategory';
+import LoadingGif from '@/components/atoms/LoadingGif.vue';
 
 const isAddProductActive = ref(false);
-// const { defaultProducts, customProducts, productsList, setDefaultProducts, setCustomProducts, setProductsList, countShoppingProgress } =
-// useContext(ProductsContext);
+const { defaultProducts, customProducts, productsList, setDefaultProducts, setCustomProducts, setProductsList, countShoppingProgress } =
+	useProductsContext();
 const { isEditPanelOpen, closeEditPanel } = useEditProduct();
 const { isCategoryPanelOpen, closeCategoryPanel } = useChangeCategory();
 
@@ -79,6 +81,7 @@ const { isCategoryPanelOpen, closeCategoryPanel } = useChangeCategory();
 			<Header />
 			<ProgressBar />
 		</div>
+		<LoadingGif v-if="!productsList.length" />
 	</div>
 </template>
 
