@@ -3,6 +3,7 @@ import Header from '@/components/molecules/Header.vue';
 import ProgressBar from '@/components/atoms/ProgressBar.vue';
 import LoadingGif from '@/components/atoms/LoadingGif.vue';
 import ProductsList from '@/components/organisms/ProductsList.vue';
+import AddProduct from './AddProduct.vue';
 
 import { ref } from 'vue';
 import { useProductsContext } from '@/providers/ProductsProvider';
@@ -17,7 +18,7 @@ const { isEditPanelOpen, closeEditPanel } = useEditProductContext();
 const { isCategoryPanelOpen, closeCategoryPanel } = useChangeCategoryContext();
 
 // const showAddProductView = () => setAddProductState(true);
-// const hideAddProductView = () => setAddProductState(false);
+const hideAddProductView = () => (isAddProductActive.value = false);
 
 // const handleClosePanels = (e: KeyboardEvent) => {
 // if (e.key !== 'Escape') return;
@@ -85,12 +86,13 @@ const { isCategoryPanelOpen, closeCategoryPanel } = useChangeCategoryContext();
 		</div>
 		<!-- <LoadingGif v-if="!productsList.length" /> -->
 		<!-- <template v-else> -->
-			<ProductsList
-				v-if="productsList.some(product => product.quantity >= 0)"
-				:productsList
-				:isInert="isAddProductActive || isEditPanelOpen || isCategoryPanelOpen" />
-			<EmptyShoppingList v-else />
+		<ProductsList
+			v-if="productsList.some(product => product.quantity >= 0)"
+			:productsList
+			:isInert="isAddProductActive || isEditPanelOpen || isCategoryPanelOpen" />
+		<EmptyShoppingList v-else />
 		<!-- </template> -->
+		<AddProduct :isActive="isAddProductActive" :hideAddProductView />
 	</div>
 </template>
 
