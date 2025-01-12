@@ -238,6 +238,7 @@ const useProducts = () => {
 		setCustomProducts,
 		setProductsList,
 		countShoppingProgress,
+		handleBoughtStatus,
 		removeBoughtProducts,
 	};
 };

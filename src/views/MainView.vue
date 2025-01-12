@@ -1,18 +1,20 @@
 <script setup lang="ts">
 import Header from '@/components/molecules/Header.vue';
 import ProgressBar from '@/components/atoms/ProgressBar.vue';
+import LoadingGif from '@/components/atoms/LoadingGif.vue';
+import ProductsList from '@/components/organisms/ProductsList.vue';
 
 import { ref } from 'vue';
 import { useProductsContext } from '@/providers/ProductsProvider';
-import { useEditProduct } from '@/composables/useEditProduct';
-import { useChangeCategory } from '@/composables/useChangeCategory';
-import LoadingGif from '@/components/atoms/LoadingGif.vue';
+import { useEditProductContext } from '@/providers/EditProductProvider';
+import { useChangeCategoryContext } from '@/providers/useChangeCategory';
+import EmptyShoppingList from '@/components/molecules/EmptyShoppingList.vue';
 
 const isAddProductActive = ref(false);
 const { defaultProducts, customProducts, productsList, setDefaultProducts, setCustomProducts, setProductsList, countShoppingProgress } =
 	useProductsContext();
-const { isEditPanelOpen, closeEditPanel } = useEditProduct();
-const { isCategoryPanelOpen, closeCategoryPanel } = useChangeCategory();
+const { isEditPanelOpen, closeEditPanel } = useEditProductContext();
+const { isCategoryPanelOpen, closeCategoryPanel } = useChangeCategoryContext();
 
 // const showAddProductView = () => setAddProductState(true);
 // const hideAddProductView = () => setAddProductState(false);
@@ -81,7 +83,14 @@ const { isCategoryPanelOpen, closeCategoryPanel } = useChangeCategory();
 			<Header />
 			<ProgressBar />
 		</div>
-		<LoadingGif v-if="!productsList.length" />
+		<!-- <LoadingGif v-if="!productsList.length" /> -->
+		<!-- <template v-else> -->
+			<ProductsList
+				v-if="productsList.some(product => product.quantity >= 0)"
+				:productsList
+				:isInert="isAddProductActive || isEditPanelOpen || isCategoryPanelOpen" />
+			<EmptyShoppingList v-else />
+		<!-- </template> -->
 	</div>
 </template>
 

@@ -1,8 +1,9 @@
+import { createProvider } from '@/utils/createProvider';
 import { ref } from 'vue';
 
 const initialCategoryPanelState = false;
 
-export const useChangeCategory = () => {
+const useChangeCategory = () => {
 	const isCategoryPanelOpen = ref(initialCategoryPanelState);
 	const highlightedCategory = ref('');
 	const categoryChangeProductId = ref(null);
@@ -26,6 +27,9 @@ export const useChangeCategory = () => {
 
 	return {
 		isCategoryPanelOpen,
+		openCategoryPanel,
 		closeCategoryPanel,
 	};
 };
+
+export const [useChangeCategoryProvider, useChangeCategoryContext] = createProvider('ChangeCategory', useChangeCategory);

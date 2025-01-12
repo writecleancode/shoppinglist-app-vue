@@ -1,3 +1,4 @@
+import { createProvider } from '@/utils/createProvider';
 import { ref } from 'vue';
 
 const initialEditPanelState = false;
@@ -15,73 +16,7 @@ const initialEditState = {
 	isBought: false,
 };
 
-export const actionTypes = {
-	setEditedProduct: 'SET CLIKED PRODUCT AS EDITED PRODUCT',
-	inputChange: 'INPUT CHANGE',
-	quantityChange: 'QUANTITY CHANGE',
-	quantityButtonChange: 'QUANTITY CHANGE BY BUTTONS',
-	unitButtonsChange: 'UNIT CHANGE BY BUTTONS',
-	updateCategory: 'UPDATE CATEGORY',
-};
-
-const reducer = (state, action) => {
-	switch (action.type) {
-		case actionTypes.setEditedProduct:
-			return {
-				firestoreId: action.firestoreId,
-				id: action.id,
-				name: action.name,
-				category: {
-					name: action.userCategory ? action.userCategory.name : action.category.name,
-					imgSrc: action.userCategory ? action.userCategory.imgSrc : action.category.imgSrc,
-				},
-				quantity: action.quantity,
-				unit: action.unit,
-				isBought: action.isBought,
-			};
-
-		case actionTypes.inputChange: {
-			return {
-				...state,
-				[action.key]: action.value,
-			};
-		}
-
-		case actionTypes.quantityChange: {
-			return {
-				...state,
-				quantity: Number(action.value),
-			};
-		}
-
-		case actionTypes.quantityButtonChange:
-			return {
-				...state,
-				quantity: state.quantity + action.quantityChanger,
-			};
-
-		case actionTypes.unitButtonsChange:
-			return {
-				...state,
-				unit: action.unit,
-			};
-
-		case actionTypes.updateCategory: {
-			return {
-				...state,
-				category: {
-					name: action.categoryName,
-					imgSrc: action.categoryImgSrc,
-				},
-			};
-		}
-
-		default:
-			return state;
-	}
-};
-
-export const useEditProduct = () => {
+const useEditProduct = () => {
 	const isEditPanelOpen = ref(initialEditPanelState);
 	const editedProduct = ref(initialEditState);
 
@@ -126,6 +61,10 @@ export const useEditProduct = () => {
 
 	return {
 		isEditPanelOpen,
+		openEditPanel,
 		closeEditPanel,
+		setEditedProduct,
 	};
 };
+
+export const [useEditProductProvider, useEditProductContext] = createProvider('EditProducts', useEditProduct);
