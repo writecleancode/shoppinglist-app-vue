@@ -9,6 +9,7 @@ import EmptyShoppingList from '@/components/molecules/EmptyShoppingList.vue';
 import EditPanel from '@/components/molecules/EditPanel.vue';
 import ChangeCategoryPanel from '@/components/molecules/ChangeCategoryPanel.vue';
 
+import type { ProductType } from '@/types/types';
 import { collection, onSnapshot, query } from 'firebase/firestore';
 import { db } from '@/firebase';
 import { onMounted, ref, watch } from 'vue';
@@ -39,10 +40,13 @@ const handleClosePanels = (e: KeyboardEvent) => {
 onMounted(() => {
 	const productsQuery = query(collection(db, 'defaultProducts'));
 	const unsub = onSnapshot(productsQuery, productsSnapshot => {
-		const productsList = productsSnapshot.docs.map(product => ({
-			firestoreId: product.id,
-			...product.data(),
-		}));
+		const productsList = productsSnapshot.docs.map(
+			product =>
+				({
+					firestoreId: product.id,
+					...product.data(),
+				} as ProductType)
+		);
 		setDefaultProducts(productsList);
 	});
 
@@ -52,10 +56,13 @@ onMounted(() => {
 onMounted(() => {
 	const productsQuery = query(collection(db, 'customProducts'));
 	const unsub = onSnapshot(productsQuery, productsSnapshot => {
-		const productsList = productsSnapshot.docs.map(product => ({
-			firestoreId: product.id,
-			...product.data(),
-		}));
+		const productsList = productsSnapshot.docs.map(
+			product =>
+				({
+					firestoreId: product.id,
+					...product.data(),
+				} as ProductType)
+		);
 		productsList.length ? setCustomProducts(productsList) : setCustomProducts([]);
 	});
 

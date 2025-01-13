@@ -1,4 +1,4 @@
-import type { ProductType } from '@/types/types';
+import type { CustomProductType, ProductType } from '@/types/types';
 import { collection, deleteDoc, deleteField, doc, getDoc, getDocs, increment, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '@/firebase';
 import { v4 as uuid } from 'uuid';
@@ -6,16 +6,16 @@ import { ref } from 'vue';
 import { createProvider } from '@/utils/createProvider';
 
 const useProducts = () => {
-	const defaultProducts = ref([]);
-	const customProducts = ref([]);
+	const defaultProducts = ref<ProductType[]>([]);
+	const customProducts = ref<ProductType[]>([]);
 	const productsList = ref<ProductType[]>([]);
 	const shoppingProgress = ref(0);
 
-	const setDefaultProducts = productsToSet => (defaultProducts.value = productsToSet);
+	const setDefaultProducts = (productsToSet: ProductType[]) => (defaultProducts.value = productsToSet);
 
-	const setCustomProducts = productsToSet => (customProducts.value = productsToSet);
+	const setCustomProducts = (productsToSet: ProductType[]) => (customProducts.value = productsToSet);
 
-	const setProductsList = productsToSet => (productsList.value = productsToSet);
+	const setProductsList = (productsToSet: ProductType[]) => (productsList.value = productsToSet);
 
 	const countShoppingProgress = () => {
 		let productToBuy = 0;
@@ -36,7 +36,7 @@ const useProducts = () => {
 		shoppingProgress.value = boughtProductsPercentage;
 	};
 
-	const handleBoughtStatus = (firestoreId, productId, isBought) => {
+	const handleBoughtStatus = (firestoreId: string, productId: number | string, isBought: boolean) => {
 		const timeoutValue = isBought ? 400 : 650;
 
 		const dataToUpdatedPath = typeof productId === 'number' ? 'defaultProducts' : 'customProducts';
@@ -86,7 +86,7 @@ const useProducts = () => {
 		});
 	};
 
-	const updateProductsList = async editedProduct => {
+	const updateProductsList = async (editedProduct: ProductType) => {
 		if (typeof editedProduct.id === 'string') {
 			const productRef = doc(db, 'customProducts', editedProduct.firestoreId);
 			try {
@@ -134,7 +134,7 @@ const useProducts = () => {
 		}
 	};
 
-	const updateProductsQuantity = async (firebaseId, productId, quantityChanger) => {
+	const updateProductsQuantity = async (firebaseId: string, productId: number | string, quantityChanger: 1 | -1) => {
 		if (typeof productId === 'number') {
 			const productRef = doc(db, 'defaultProducts', firebaseId);
 			try {
@@ -168,7 +168,10 @@ const useProducts = () => {
 		}
 	};
 
-	const updateProductCategory = async (categoryChangeProductId, clickedCategory) => {
+	const updateProductCategory = async (
+		categoryChangeProductId: { id: string | number; firestoreId: string } | null,
+		clickedCategory: { name: string; imgSrc: string }
+	) => {
 		if (typeof categoryChangeProductId?.id === 'string') {
 			const productRef = doc(db, 'customProducts', categoryChangeProductId.firestoreId);
 			try {
@@ -190,7 +193,7 @@ const useProducts = () => {
 		}
 	};
 
-	const updateCustomProductsQuantity = async customProduct => {
+	const updateCustomProductsQuantity = async (customProduct: CustomProductType) => {
 		if (customProduct.name === '') return;
 
 		try {

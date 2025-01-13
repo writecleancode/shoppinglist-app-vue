@@ -20,8 +20,8 @@ const sortedProductsList = useSort(productsList);
 
 <template>
 	<div class="products-list-wrapper" :inert="isInert">
-		<ProductsToBuy :productsList="sortedProductsList" />
-		<BoughtProducts :productsList="sortedProductsList" />
+		<ProductsToBuy :productsList="productsList" />
+		<BoughtProducts :productsList="productsList" />
 	</div>
 </template>
 
