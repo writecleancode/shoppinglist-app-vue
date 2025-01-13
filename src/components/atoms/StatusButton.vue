@@ -235,6 +235,18 @@ const props = defineProps({
 		}
 	}
 
+	&.check-animation {
+		.bar {
+			&:nth-child(odd)::after {
+				animation: bars-slide 0.25s ease-out 0.25s;
+			}
+
+			&:nth-child(even)::after {
+				animation: bars-slide 0.45s ease-out 0.25s;
+			}
+		}
+	}
+
 	.bar-top {
 		top: 0;
 		left: 50%;
