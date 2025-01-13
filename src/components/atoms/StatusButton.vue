@@ -19,7 +19,7 @@ const props = defineProps({
 		<div class="status-btn-icon-wrapper" :class="[{ bought: isBought }, animationType]">
 			<CheckIcon />
 		</div>
-		<div class="status-btn-bars-wrapper" :class="animationType">
+		<div class="status-btn-bars-wrapper" :class="[{ bought: isBought }, animationType]">
 			<span class="bar bar-top"></span>
 			<span class="bar bar-top-left"></span>
 			<span class="bar bar-left"></span>
@@ -301,6 +301,12 @@ const props = defineProps({
 		right: 20%;
 		translate: 50% -50%;
 		rotate: 135deg;
+	}
+
+	&.bought {
+		.bar {
+			background-color: transparent;
+		}
 	}
 }
 </style>

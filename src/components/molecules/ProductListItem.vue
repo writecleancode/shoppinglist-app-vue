@@ -15,12 +15,12 @@ const { product } = defineProps({
 	},
 });
 
-const clickedProductId = ref(-1);
+const clickedProductId = ref<string | number>(-1);
 const { handleBoughtStatus } = useProductsContext();
 const { openEditPanel, setEditedProduct } = useEditProductContext();
 const { openCategoryPanel } = useChangeCategoryContext();
 
-const handleBoughtStatusButton = (firestoreId, productId, isBought) => {
+const handleBoughtStatusButton = (firestoreId: string, productId: number | string, isBought: boolean) => {
 	clickedProductId.value = productId;
 	handleBoughtStatus(firestoreId, productId, isBought);
 };

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ProductListItem from './ProductListItem.vue';
+import ProductListItem from '@/components/molecules/ProductListItem.vue';
 
 const props = defineProps({
 	productsList: {
