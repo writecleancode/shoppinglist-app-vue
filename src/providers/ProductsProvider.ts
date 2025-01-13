@@ -242,6 +242,7 @@ const useProducts = () => {
 		removeBoughtProducts,
 		updateProductsList,
 		updateProductsQuantity,
+		updateProductCategory,
 		updateCustomProductsQuantity,
 	};
 };

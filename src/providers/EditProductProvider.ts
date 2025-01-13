@@ -69,6 +69,7 @@ const useEditProduct = () => {
 		setProductsQuantity,
 		changeProductsQuantity,
 		setProductsUnit,
+		setProductsCategory,
 	};
 };
 

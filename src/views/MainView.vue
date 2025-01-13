@@ -4,12 +4,13 @@ import ProgressBar from '@/components/atoms/ProgressBar.vue';
 import LoadingGif from '@/components/atoms/LoadingGif.vue';
 import ProductsList from '@/components/organisms/ProductsList.vue';
 import AddProduct from './AddProduct.vue';
+import EmptyShoppingList from '@/components/molecules/EmptyShoppingList.vue';
+import ChangeCategoryPanel from '@/components/molecules/ChangeCategoryPanel.vue';
 
 import { ref } from 'vue';
 import { useProductsContext } from '@/providers/ProductsProvider';
 import { useEditProductContext } from '@/providers/EditProductProvider';
 import { useChangeCategoryContext } from '@/providers/useChangeCategory';
-import EmptyShoppingList from '@/components/molecules/EmptyShoppingList.vue';
 
 const isAddProductActive = ref(false);
 const { defaultProducts, customProducts, productsList, setDefaultProducts, setCustomProducts, setProductsList, countShoppingProgress } =
@@ -93,6 +94,7 @@ const hideAddProductView = () => (isAddProductActive.value = false);
 			<EmptyShoppingList v-else />
 		</template>
 		<AddProduct :isActive="isAddProductActive" :hideAddProductView />
+		<ChangeCategoryPanel />
 	</div>
 </template>
 
