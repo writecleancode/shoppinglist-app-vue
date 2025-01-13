@@ -12,7 +12,7 @@ const props = defineProps({
 <template>
 	<ul>
 		<template v-for="product in productsList">
-			<ProductListItem v-if="product.quantity > 0 && product.isBought" :key="product.id" :product />
+			<ProductListItem v-if="product.quantity >= 0 && product.isBought" :key="product.id" :product />
 		</template>
 	</ul>
 </template>
