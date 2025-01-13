@@ -20,7 +20,7 @@
 	padding: 0.8rem 1.6rem 0.8rem 0.8rem;
 	border: none;
 	border-radius: 100px;
-	background-color: secondary;
+	background-color: $secondary;
 	color: #fff;
 	box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.25);
 	font-size: 1.6rem;
