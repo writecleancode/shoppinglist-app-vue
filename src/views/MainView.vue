@@ -16,6 +16,7 @@ import { onMounted, ref, watch } from 'vue';
 import { useProductsContext } from '@/providers/ProductsProvider';
 import { useEditProductContext } from '@/providers/EditProductProvider';
 import { useChangeCategoryContext } from '@/providers/useChangeCategory';
+import { useSort } from '@/hooks/useSort';
 
 const isAddProductActive = ref(false);
 const { defaultProducts, customProducts, productsList, setDefaultProducts, setCustomProducts, setProductsList, countShoppingProgress } =
@@ -74,6 +75,9 @@ onMounted(() => {
 });
 
 watch([defaultProducts, customProducts], () => {
+	// const allProducts = [...defaultProducts.value, ...customProducts.value];
+	// const sortedProducts = useSort(allProducts);
+	// setProductsList(sortedProducts);
 	setProductsList([...defaultProducts.value, ...customProducts.value]);
 });
 

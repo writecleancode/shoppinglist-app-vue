@@ -8,17 +8,18 @@ const props = defineProps({
 	},
 	animationType: {
 		type: String,
+		required: true,
 	},
 });
 </script>
 
 <template>
 	<button class="status-btn" :aria-label="isBought ? 'mark product as not bought' : 'mark product as bought'">
-		<span class="status-btn-circle" :class="{ bought: isBought, animationType }"></span>
-		<div class="status-btn-icon-wrapper" :class="{ bought: isBought, animationType }">
+		<span class="status-btn-circle" :class="[{ bought: isBought }, animationType]"></span>
+		<div class="status-btn-icon-wrapper" :class="[{ bought: isBought }, animationType]">
 			<CheckIcon />
 		</div>
-		<div class="status-btn-bars-wrapper" :class="{ animationType }">
+		<div class="status-btn-bars-wrapper" :class="animationType">
 			<span class="bar bar-top"></span>
 			<span class="bar bar-top-left"></span>
 			<span class="bar bar-left"></span>
@@ -161,7 +162,7 @@ const props = defineProps({
 
 	&.no-animation {
 		&::before,
-		*::after {
+		&::after {
 			animation: none;
 		}
 	}
@@ -189,7 +190,10 @@ const props = defineProps({
 	&.bought {
 		&.no-animation,
 		&.check-animation {
-			background-color: transparent;
+			&::before,
+			&::after {
+				background-color: transparent;
+			}
 		}
 	}
 }
@@ -200,7 +204,7 @@ const props = defineProps({
 	z-index: 0;
 
 	.bar {
-        display: block;
+		display: block;
 		position: absolute;
 		width: 8px;
 		height: 3px;

@@ -15,7 +15,7 @@ const { productsList } = defineProps({
 	},
 });
 
-const sortedProductsList = useSort(productsList);
+// const sortedProductsList = useSort(productsList.value);
 </script>
 
 <template>

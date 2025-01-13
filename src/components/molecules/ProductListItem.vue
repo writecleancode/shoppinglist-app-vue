@@ -41,7 +41,7 @@ const handleProductClick = () => {
 			{{ product.name }}
 		</button>
 		<QuantityOfProduct :quantity="product.quantity">
-			{{ product.quantity }} {{ product.quantity > 0 ? product.unit : '' }}
+			{{ product.quantity }}{{ product.quantity > 0 ? product.unit : '' }}
 		</QuantityOfProduct>
 		<CategoryIcon
 			:category="product.userCategory ? product.userCategory.name : product.category.name"

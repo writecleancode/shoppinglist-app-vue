@@ -1,4 +1,6 @@
-export const useSort = productsList => {
+import type { ProductType } from '@/types/types';
+
+export const useSort = (productsList: ProductType[]) => {
 	const sortProductsByCategory = (productCategory: string) => {
 		switch (productCategory) {
 			case 'appliances and electronics':
