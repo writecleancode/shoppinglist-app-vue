@@ -16,7 +16,6 @@ import { onMounted, ref, watch } from 'vue';
 import { useProductsContext } from '@/providers/ProductsProvider';
 import { useEditProductContext } from '@/providers/EditProductProvider';
 import { useChangeCategoryContext } from '@/providers/useChangeCategory';
-import { useSort } from '@/hooks/useSort';
 
 const isAddProductActive = ref(false);
 const {

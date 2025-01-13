@@ -2,13 +2,14 @@
 import SearchBar from '@/components/molecules/SearchBar.vue';
 import ProductsToAdd from '@/components/organisms/ProductsToAdd.vue';
 
+import type { CustomProductType, ProductType } from '@/types/types';
 import { ref, watch } from 'vue';
 import { useProductsContext } from '@/providers/ProductsProvider';
 
 const { isActive, hideAddProductView } = defineProps({
 	isActive: {
 		type: Boolean,
-		default: false,
+		required: true,
 	},
 	hideAddProductView: {
 		type: Function,
@@ -38,28 +39,31 @@ const handleBackButton = () => {
 	customProduct.value = initialProductState;
 };
 
-const setSearchInputValue = inputValue => (searchInputValue.value = inputValue);
+const setSearchInputValue = (inputValue: string) => (searchInputValue.value = inputValue);
 
 const clearInput = () => (searchInputValue.value = '');
 
-const setProductsToAdd = productsToSet => (productsToAdd.value = productsToSet);
+const setProductsToAdd = (productsToSet: ProductType[]) => (productsToAdd.value = productsToSet);
 
-const changePorudctsToAddQuantity = (index, quantityChanger) => {
+const changePorudctsToAddQuantity = (index: number, quantityChanger: 1 | -1) => {
 	productsToAdd.value[index].quantity += quantityChanger;
 	productsToAdd.value[index].unit = productsToAdd.value[index].quantity + quantityChanger < 0 ? '' : productsToAdd.value[index].unit;
 };
 
-const setCustomProduct = productToSet => (customProduct.value = productToSet);
+const setCustomProduct = (productToSet: CustomProductType) => (customProduct.value = productToSet);
 
 const changeCustomProductQuantity = (quantityChanger: 1 | -1) => (customProduct.value.quantity += quantityChanger);
 
-// watch(isActive, () => {
-// 	isActive.value ? setProductsToAdd(defaultProducts) : clearInput();
-// });
+watch(
+	() => isActive,
+	() => {
+		isActive ? setProductsToAdd(defaultProducts.value) : clearInput();
+	}
+);
 
-// watch(customProduct.quantity, () => {
-// 	updateCustomProductsQuantity(customProduct);
-// });
+watch(customProduct, () => {
+	updateCustomProductsQuantity(customProduct.value);
+});
 </script>
 
 <template>
