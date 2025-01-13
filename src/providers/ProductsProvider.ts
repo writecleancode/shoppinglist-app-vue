@@ -1,3 +1,4 @@
+import type { ProductType } from '@/types/types';
 import { collection, deleteDoc, deleteField, doc, getDoc, getDocs, increment, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '@/firebase';
 import { v4 as uuid } from 'uuid';
@@ -7,7 +8,7 @@ import { createProvider } from '@/utils/createProvider';
 const useProducts = () => {
 	const defaultProducts = ref([]);
 	const customProducts = ref([]);
-	const productsList = ref([]);
+	const productsList = ref<ProductType[]>([]);
 	const shoppingProgress = ref(0);
 
 	const setDefaultProducts = productsToSet => (defaultProducts.value = productsToSet);

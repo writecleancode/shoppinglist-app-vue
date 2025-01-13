@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
 	<div class="loading-gif-wrapper">
 		<img src="/img/loading.gif" alt="loading..." />

@@ -9,12 +9,12 @@ import EmptyShoppingList from '@/components/molecules/EmptyShoppingList.vue';
 import EditPanel from '@/components/molecules/EditPanel.vue';
 import ChangeCategoryPanel from '@/components/molecules/ChangeCategoryPanel.vue';
 
+import { collection, onSnapshot, query } from 'firebase/firestore';
+import { db } from '@/firebase';
 import { onMounted, ref, watch } from 'vue';
 import { useProductsContext } from '@/providers/ProductsProvider';
 import { useEditProductContext } from '@/providers/EditProductProvider';
 import { useChangeCategoryContext } from '@/providers/useChangeCategory';
-import { collection, onSnapshot, query } from 'firebase/firestore';
-import { db } from '@/firebase';
 
 const isAddProductActive = ref(false);
 const { defaultProducts, customProducts, productsList, setDefaultProducts, setCustomProducts, setProductsList, countShoppingProgress } =
@@ -25,7 +25,7 @@ const { isCategoryPanelOpen, closeCategoryPanel } = useChangeCategoryContext();
 const showAddProductView = () => (isAddProductActive.value = true);
 const hideAddProductView = () => (isAddProductActive.value = false);
 
-const handleClosePanels = e => {
+const handleClosePanels = (e: KeyboardEvent) => {
 	if (e.key !== 'Escape') return;
 
 	if (isCategoryPanelOpen) {
