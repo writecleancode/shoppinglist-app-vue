@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
 	<button class="add-products-btn" aria-label="add products">
 		<img src="/icons/plus.svg" alt="" />
