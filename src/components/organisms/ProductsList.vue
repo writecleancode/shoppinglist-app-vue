@@ -7,10 +7,11 @@ import { useSort } from '@/hooks/useSort';
 const { productsList } = defineProps({
 	isInert: {
 		type: Boolean,
-		default: false,
+		required: true,
 	},
 	productsList: {
 		type: Object,
+		required: true,
 	},
 });
 
@@ -31,11 +32,11 @@ const sortedProductsList = useSort(productsList);
 	padding-bottom: 7rem;
 	background-color: $lightGrey;
 	overflow-y: auto;
+}
 
-	@media (min-width: 576px) {
-		.products-list-wrapper {
-			font-size: 1.8rem;
-		}
+@media (min-width: 576px) {
+	.products-list-wrapper {
+		font-size: 1.8rem;
 	}
 }
 </style>
