@@ -66,7 +66,7 @@ const handleProductClick = () => {
 	padding-left: 0;
 	border-bottom: 1px solid #ececec;
 
-	.bought {
+	&.bought {
 		border-bottom: none;
 		color: $lightBlack;
 	}
