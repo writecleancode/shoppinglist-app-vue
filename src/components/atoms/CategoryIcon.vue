@@ -104,6 +104,9 @@ const bgColor = () => {
 
 <style lang="scss" scoped>
 .category-icon-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	margin-left: 0.8rem;
 	border: none;
 	border-radius: 100px;
@@ -118,7 +121,7 @@ const bgColor = () => {
 		filter: grayscale(85%);
 	}
 
-	img {
+	::v-deep(img) {
 		width: 24px;
 		height: 24px;
 	}
