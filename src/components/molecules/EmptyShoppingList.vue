@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
 	<div class="empty-shopping-list-wrapper">
 		<img src="/img/happy_shopper.png" alt="happy shopper jumping with shopping bags" class="empty-shopping-list-img" />
