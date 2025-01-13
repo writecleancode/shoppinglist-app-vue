@@ -240,6 +240,7 @@ const useProducts = () => {
 		countShoppingProgress,
 		handleBoughtStatus,
 		removeBoughtProducts,
+		updateProductsList,
 		updateProductsQuantity,
 		updateCustomProductsQuantity,
 	};

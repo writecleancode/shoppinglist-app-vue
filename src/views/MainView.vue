@@ -84,14 +84,14 @@ const hideAddProductView = () => (isAddProductActive.value = false);
 			<Header />
 			<ProgressBar />
 		</div>
-		<!-- <LoadingGif v-if="!productsList.length" /> -->
-		<!-- <template v-else> -->
-		<ProductsList
-			v-if="productsList.some(product => product.quantity >= 0)"
-			:productsList
-			:isInert="isAddProductActive || isEditPanelOpen || isCategoryPanelOpen" />
-		<EmptyShoppingList v-else />
-		<!-- </template> -->
+		<LoadingGif v-if="!productsList.length" />
+		<template v-else>
+			<ProductsList
+				v-if="productsList.some(product => product.quantity >= 0)"
+				:productsList
+				:isInert="isAddProductActive || isEditPanelOpen || isCategoryPanelOpen" />
+			<EmptyShoppingList v-else />
+		</template>
 		<AddProduct :isActive="isAddProductActive" :hideAddProductView />
 	</div>
 </template>

@@ -38,7 +38,7 @@ const useEditProduct = () => {
 		};
 	};
 
-	const handleInputChange = (inputName, inputValue) => {
+	const setEditedProductValue = (inputName, inputValue) => {
 		editedProduct.value[inputName] = inputValue;
 	};
 
@@ -61,9 +61,14 @@ const useEditProduct = () => {
 
 	return {
 		isEditPanelOpen,
+		editedProduct,
 		openEditPanel,
 		closeEditPanel,
 		setEditedProduct,
+		setEditedProductValue,
+		setProductsQuantity,
+		changeProductsQuantity,
+		setProductsUnit,
 	};
 };
 
