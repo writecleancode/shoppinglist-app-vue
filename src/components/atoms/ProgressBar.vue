@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { useProductsContext } from '@/providers/ProductsProvider';
 
 const { shoppingProgress } = useProductsContext();
 
-const shoppingProgressStyleValue = `translate(${shoppingProgress.value}%)`;
+const shoppingProgressStyleValue = computed(() => `translate(${shoppingProgress.value}%)`);
 </script>
 
 <template>

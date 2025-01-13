@@ -62,6 +62,10 @@ onMounted(() => {
 	return () => unsub();
 });
 
+onMounted(() => {
+	countShoppingProgress();
+});
+
 watch([defaultProducts, customProducts], () => {
 	setProductsList([...defaultProducts.value, ...customProducts.value]);
 });
