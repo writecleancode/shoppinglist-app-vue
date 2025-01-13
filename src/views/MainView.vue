@@ -3,14 +3,18 @@ import Header from '@/components/molecules/Header.vue';
 import ProgressBar from '@/components/atoms/ProgressBar.vue';
 import LoadingGif from '@/components/atoms/LoadingGif.vue';
 import ProductsList from '@/components/organisms/ProductsList.vue';
-import AddProduct from './AddProduct.vue';
+import AddButton from '@/components/atoms/AddButton.vue';
+import AddProducts from '@/views/AddProducts.vue';
 import EmptyShoppingList from '@/components/molecules/EmptyShoppingList.vue';
+import EditPanel from '@/components/molecules/EditPanel.vue';
 import ChangeCategoryPanel from '@/components/molecules/ChangeCategoryPanel.vue';
 
-import { ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useProductsContext } from '@/providers/ProductsProvider';
 import { useEditProductContext } from '@/providers/EditProductProvider';
 import { useChangeCategoryContext } from '@/providers/useChangeCategory';
+import { collection, onSnapshot, query } from 'firebase/firestore';
+import { db } from '@/firebase';
 
 const isAddProductActive = ref(false);
 const { defaultProducts, customProducts, productsList, setDefaultProducts, setCustomProducts, setProductsList, countShoppingProgress } =
@@ -18,65 +22,59 @@ const { defaultProducts, customProducts, productsList, setDefaultProducts, setCu
 const { isEditPanelOpen, closeEditPanel } = useEditProductContext();
 const { isCategoryPanelOpen, closeCategoryPanel } = useChangeCategoryContext();
 
-// const showAddProductView = () => setAddProductState(true);
+const showAddProductView = () => (isAddProductActive.value = true);
 const hideAddProductView = () => (isAddProductActive.value = false);
 
-// const handleClosePanels = (e: KeyboardEvent) => {
-// if (e.key !== 'Escape') return;
+const handleClosePanels = e => {
+	if (e.key !== 'Escape') return;
 
-// if (isCategoryPanelOpen) {
-// closeCategoryPanel();
-// return;
-// }
+	if (isCategoryPanelOpen) {
+		closeCategoryPanel();
+		return;
+	}
 
-// closeEditPanel();
-// };
+	closeEditPanel();
+};
 
-// useEffect(() => {
-// const productsQuery = query(collection(db, 'defaultProducts'));
-// const unsub = onSnapshot(productsQuery, productsSnapshot => {
-// const productsList = productsSnapshot.docs.map(
-// product =>
-// ({
-// firestoreId: product.id,
-// ...product.data(),
-// } as ProductType)
-// );
-// setDefaultProducts(productsList);
-// });
+onMounted(() => {
+	const productsQuery = query(collection(db, 'defaultProducts'));
+	const unsub = onSnapshot(productsQuery, productsSnapshot => {
+		const productsList = productsSnapshot.docs.map(product => ({
+			firestoreId: product.id,
+			...product.data(),
+		}));
+		setDefaultProducts(productsList);
+	});
 
-// return () => unsub();
-// }, []);
+	return () => unsub();
+});
 
-// useEffect(() => {
-// const productsQuery = query(collection(db, 'customProducts'));
-// const unsub = onSnapshot(productsQuery, productsSnapshot => {
-// const productsList = productsSnapshot.docs.map(
-// product =>
-// ({
-// firestoreId: product.id,
-// ...product.data(),
-// } as ProductType)
-// );
-// productsList.length ? setCustomProducts(productsList) : setCustomProducts([]);
-// });
+onMounted(() => {
+	const productsQuery = query(collection(db, 'customProducts'));
+	const unsub = onSnapshot(productsQuery, productsSnapshot => {
+		const productsList = productsSnapshot.docs.map(product => ({
+			firestoreId: product.id,
+			...product.data(),
+		}));
+		productsList.length ? setCustomProducts(productsList) : setCustomProducts([]);
+	});
 
-// return () => unsub();
-// }, []);
+	return () => unsub();
+});
 
-// useEffect(() => {
-// setProductsList([...defaultProducts, ...customProducts]);
-// }, [defaultProducts, customProducts]);
+watch([defaultProducts, customProducts], () => {
+	setProductsList([...defaultProducts.value, ...customProducts.value]);
+});
 
-// useEffect(() => {
-// countShoppingProgress();
-// }, [productsList]);
+watch(productsList, () => {
+	countShoppingProgress();
+});
 
-// useEffect(() => {
-// window.addEventListener('keydown', handleClosePanels);
+watch([isEditPanelOpen, isCategoryPanelOpen], () => {
+	window.addEventListener('keydown', handleClosePanels);
 
-// return () => window.removeEventListener('keydown', handleClosePanels);
-// }, [isEditPanelOpen, isCategoryPanelOpen]);
+	return () => window.removeEventListener('keydown', handleClosePanels);
+});
 </script>
 
 <template>
@@ -93,7 +91,9 @@ const hideAddProductView = () => (isAddProductActive.value = false);
 				:isInert="isAddProductActive || isEditPanelOpen || isCategoryPanelOpen" />
 			<EmptyShoppingList v-else />
 		</template>
-		<AddProduct :isActive="isAddProductActive" :hideAddProductView />
+		<AddButton @click="showAddProductView" :inert="isAddProductActive || isEditPanelOpen || isCategoryPanelOpen" />
+		<AddProducts :isActive="isAddProductActive" :hideAddProductView />
+		<EditPanel />
 		<ChangeCategoryPanel />
 	</div>
 </template>
