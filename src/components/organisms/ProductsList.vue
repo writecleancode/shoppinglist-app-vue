@@ -2,8 +2,6 @@
 import ProductsToBuy from '@/components/molecules/ProductsToBuy.vue';
 import BoughtProducts from '@/components/molecules/BoughtProducts.vue';
 
-import { useSort } from '@/hooks/useSort';
-
 const { productsList } = defineProps({
 	isInert: {
 		type: Boolean,
@@ -14,14 +12,12 @@ const { productsList } = defineProps({
 		required: true,
 	},
 });
-
-// const sortedProductsList = useSort(productsList.value);
 </script>
 
 <template>
 	<div class="products-list-wrapper" :inert="isInert">
-		<ProductsToBuy :productsList="productsList" />
-		<BoughtProducts :productsList="productsList" />
+		<ProductsToBuy :productsList />
+		<BoughtProducts :productsList />
 	</div>
 </template>
 

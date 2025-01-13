@@ -18,6 +18,10 @@ const useProducts = () => {
 
 	const setProductsList = (productsToSet: ProductType[]) => (productsList.value = productsToSet);
 
+	const sortProducts = (productsToSort = productsList.value) => {
+		productsList.value = useSort(productsToSort);
+	};
+
 	const countShoppingProgress = () => {
 		let productToBuy = 0;
 		let boughtProducts = 0;
@@ -242,6 +246,7 @@ const useProducts = () => {
 		setDefaultProducts,
 		setCustomProducts,
 		setProductsList,
+		sortProducts,
 		countShoppingProgress,
 		handleBoughtStatus,
 		removeBoughtProducts,

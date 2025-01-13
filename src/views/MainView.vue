@@ -19,8 +19,16 @@ import { useChangeCategoryContext } from '@/providers/useChangeCategory';
 import { useSort } from '@/hooks/useSort';
 
 const isAddProductActive = ref(false);
-const { defaultProducts, customProducts, productsList, setDefaultProducts, setCustomProducts, setProductsList, countShoppingProgress } =
-	useProductsContext();
+const {
+	defaultProducts,
+	customProducts,
+	productsList,
+	setDefaultProducts,
+	setCustomProducts,
+	setProductsList,
+	sortProducts,
+	countShoppingProgress,
+} = useProductsContext();
 const { isEditPanelOpen, closeEditPanel } = useEditProductContext();
 const { isCategoryPanelOpen, closeCategoryPanel } = useChangeCategoryContext();
 
@@ -75,10 +83,8 @@ onMounted(() => {
 });
 
 watch([defaultProducts, customProducts], () => {
-	// const allProducts = [...defaultProducts.value, ...customProducts.value];
-	// const sortedProducts = useSort(allProducts);
-	// setProductsList(sortedProducts);
 	setProductsList([...defaultProducts.value, ...customProducts.value]);
+	sortProducts();
 });
 
 watch(productsList, () => {
