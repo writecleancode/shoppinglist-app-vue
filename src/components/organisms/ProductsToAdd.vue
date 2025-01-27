@@ -39,6 +39,7 @@ const lastClickedProductId = ref<number | string>(-1);
 const quantityNumber = ref(-1); // used for plus icon rotate animation - to prevent animation after custom product is replaced by another
 
 const cssRotationDegreeValue = computed(() => {
+	// console.log(`${quantityNumber.value * 180}deg`);
 	`${quantityNumber.value * 180}deg`;
 });
 
@@ -103,7 +104,7 @@ watch(
 			<QuantityOfProduct :quantity="customProduct.quantity">{{ customProduct.quantity }}</QuantityOfProduct>
 			<button
 				class="decrease-btn"
-				:class="{ active: customProduct.quantity > 0 }"
+				:class="{ active: customProduct.quantity >= 0 }"
 				@click="handleCustomProductQuantity(-999, 'decrease')"
 				:aria-label="`decrease quantity of ${customProduct.name}`"></button>
 		</li>
@@ -126,7 +127,7 @@ watch(
 			</QuantityOfProduct>
 			<button
 				class="decrease-btn"
-				:class="{ active: product.quantity > 0 }"
+				:class="{ active: product.quantity >= 0 }"
 				@click="handleProductQuantity(product.firestoreId, product.id, index, 'decrease')"
 				:aria-label="`decrease quantity of ${customProduct.name}`"></button>
 		</li>
@@ -174,11 +175,11 @@ watch(
 
 	transition: rotate 0.5s, scale 0.35s;
 
-	.added {
+	&.added {
 		background-color: $secondary;
 	}
 
-	.animating {
+	&.animating {
 		scale: 0.75;
 	}
 }
