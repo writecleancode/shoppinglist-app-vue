@@ -18,15 +18,16 @@ const {
 } = useEditProductContext();
 const { isCategoryPanelOpen, openCategoryPanel } = useChangeCategoryContext();
 
-const handleInputChange = e => {
-	setEditedProductValue(e.target.name, e.target.value);
+const handleInputChange = (e: Event) => {
+	const target = e.target as HTMLInputElement;
+	setEditedProductValue(target.name, target.value);
 };
 
-const handleQuantityChange = e => {
-	setProductsQuantity(e.target.value);
+const handleQuantityChange = (e: Event) => {
+	setProductsQuantity((e.target as HTMLInputElement).value);
 };
 
-const handleUnitButtons = unit => {
+const handleUnitButtons = (unit: string) => {
 	setProductsUnit(unit);
 };
 
@@ -36,7 +37,7 @@ const handleQuantityButtons = (direction: string) => {
 };
 
 const handleSaveChangesButton = () => {
-	updateProductsList(editedProduct);
+	updateProductsList(editedProduct.value);
 	closeEditPanel();
 };
 </script>

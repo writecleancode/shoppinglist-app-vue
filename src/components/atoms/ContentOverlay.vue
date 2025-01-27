@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const props = defineProps({
-	isAcitve: {
+defineProps({
+	isActive: {
 		type: Boolean,
 		default: false,
 	},
@@ -8,7 +8,7 @@ const props = defineProps({
 </script>
 
 <template>
-	<div class="content-overlay" :class="{ active: isAcitve }">
+	<div class="content-overlay" :class="{ active: isActive }">
 		<slot />
 	</div>
 </template>
@@ -25,7 +25,7 @@ const props = defineProps({
 	pointer-events: none;
 	transition: opacity 0.3s;
 
-	.active {
+	&.active {
 		opacity: 1;
 		pointer-events: auto;
 	}

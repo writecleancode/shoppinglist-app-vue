@@ -38,10 +38,6 @@ const { updateProductsQuantity } = useProductsContext();
 const lastClickedProductId = ref<number | string>(-1);
 const quantityNumber = ref(-1); // used for plus icon rotate animation - to prevent animation after custom product is replaced by another
 
-const cssRotationDegreeValue = computed(() => {
-	return `${quantityNumber.value * 180}deg`;
-});
-
 const handlePlusIconScale = (productId: number | string) => {
 	lastClickedProductId.value = productId;
 	clearTimeout(timeout);
@@ -169,7 +165,6 @@ watch(
 	border: none;
 	border-radius: 100px;
 	background-color: $grey;
-	/* rotate: v-bind(cssRotationDegreeValue); */
 	scale: 1;
 
 	transition: rotate 0.5s, scale 0.35s;

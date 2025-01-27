@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+
 const { category } = defineProps({
 	category: {
 		type: String,
@@ -10,7 +12,7 @@ const { category } = defineProps({
 	},
 });
 
-const bgColor = () => {
+const bgColor = computed(() => {
 	switch (category) {
 		case 'alcohols and tobacco':
 			return '#fff0f5';
@@ -93,7 +95,7 @@ const bgColor = () => {
 		default:
 			return '#f7f7f7';
 	}
-};
+});
 </script>
 
 <template>
@@ -112,7 +114,7 @@ const bgColor = () => {
 	border-radius: 100px;
 	width: 3.2rem;
 	height: 3.2rem;
-	background-color: v-bind(bgColor());
+	background-color: v-bind(bgColor);
 	box-shadow: 0px 0px 4px inset rgba(0, 0, 0, 0.05);
 
 	&.bought {

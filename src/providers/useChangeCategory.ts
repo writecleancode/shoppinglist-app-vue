@@ -6,9 +6,9 @@ const initialCategoryPanelState = false;
 const useChangeCategory = () => {
 	const isCategoryPanelOpen = ref(initialCategoryPanelState);
 	const highlightedCategory = ref('');
-	const categoryChangeProductId = ref(null);
+	const categoryChangeProductId = ref<null | { id: string | number; firestoreId: string }>(null);
 
-	const openCategoryPanel = (clickedCategory, clickedId, clickedFirestoreId) => {
+	const openCategoryPanel = (clickedCategory: string, clickedId?: number | string, clickedFirestoreId?: string) => {
 		highlightedCategory.value = clickedCategory;
 		isCategoryPanelOpen.value = true;
 
