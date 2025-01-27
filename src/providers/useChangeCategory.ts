@@ -27,6 +27,8 @@ const useChangeCategory = () => {
 
 	return {
 		isCategoryPanelOpen,
+		highlightedCategory,
+		categoryChangeProductId,
 		openCategoryPanel,
 		closeCategoryPanel,
 	};

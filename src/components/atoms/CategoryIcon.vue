@@ -99,16 +99,13 @@ const bgColor = computed(() => {
 </script>
 
 <template>
-	<div class="category-icon-wrapper" :class="{ bought: isBought }">
+	<button class="category-icon-wrapper" :class="{ bought: isBought }">
 		<slot />
-	</div>
+	</button>
 </template>
 
 <style lang="scss" scoped>
 .category-icon-wrapper {
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	margin-left: 0.8rem;
 	border: none;
 	border-radius: 100px;
