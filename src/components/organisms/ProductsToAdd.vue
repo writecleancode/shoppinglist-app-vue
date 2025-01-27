@@ -39,8 +39,7 @@ const lastClickedProductId = ref<number | string>(-1);
 const quantityNumber = ref(-1); // used for plus icon rotate animation - to prevent animation after custom product is replaced by another
 
 const cssRotationDegreeValue = computed(() => {
-	// console.log(`${quantityNumber.value * 180}deg`);
-	`${quantityNumber.value * 180}deg`;
+	return `${quantityNumber.value * 180}deg`;
 });
 
 const handlePlusIconScale = (productId: number | string) => {
@@ -96,7 +95,7 @@ watch(
 				<div
 					class="plus-icon-wrapper"
 					:class="{ added: customProduct.quantity >= 0, animating: -999 === lastClickedProductId }"
-					:style="{ rotate: `${customProduct.quantity}deg` }">
+					:style="{ rotate: `${customProduct.quantity * 180}deg` }">
 					<img src="/icons/plus-big.svg" alt="" />
 				</div>
 				{{ customProduct.name }}
@@ -104,7 +103,7 @@ watch(
 			<QuantityOfProduct :quantity="customProduct.quantity">{{ customProduct.quantity }}</QuantityOfProduct>
 			<button
 				class="decrease-btn"
-				:class="{ active: customProduct.quantity >= 0 }"
+				:class="{ active: customProduct.quantity >= 0, 'decrease-active': customProduct.quantity > 0 }"
 				@click="handleCustomProductQuantity(-999, 'decrease')"
 				:aria-label="`decrease quantity of ${customProduct.name}`"></button>
 		</li>
@@ -116,7 +115,7 @@ watch(
 				<div
 					class="plus-icon-wrapper"
 					:class="{ added: product.quantity >= 0, animating: product.id === lastClickedProductId }"
-					:style="{ rotate: `${product.quantity}deg` }">
+					:style="{ rotate: `${product.quantity * 180}deg` }">
 					<img src="/icons/plus-big.svg" alt="" />
 				</div>
 				{{ product.name }}
@@ -127,7 +126,7 @@ watch(
 			</QuantityOfProduct>
 			<button
 				class="decrease-btn"
-				:class="{ active: product.quantity >= 0 }"
+				:class="{ active: product.quantity >= 0, 'decrease-active': product.quantity > 0 }"
 				@click="handleProductQuantity(product.firestoreId, product.id, index, 'decrease')"
 				:aria-label="`decrease quantity of ${customProduct.name}`"></button>
 		</li>
@@ -170,7 +169,7 @@ watch(
 	border: none;
 	border-radius: 100px;
 	background-color: $grey;
-	rotate: v-bind(cssRotationDegreeValue);
+	/* rotate: v-bind(cssRotationDegreeValue); */
 	scale: 1;
 
 	transition: rotate 0.5s, scale 0.35s;
@@ -221,7 +220,9 @@ watch(
 	&.active {
 		visibility: visible;
 		pointer-events: auto;
+	}
 
+	&.decrease-active {
 		&::before {
 			transform: rotate(0);
 		}
