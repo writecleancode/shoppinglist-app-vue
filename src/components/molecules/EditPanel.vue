@@ -165,7 +165,7 @@ const handleSaveChangesButton = () => {
 	}
 }
 
-.control-changes-button-wrapper {
+.control-changes-buttons-wrapper {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 1.6rem;
@@ -188,11 +188,11 @@ const handleSaveChangesButton = () => {
 		translate: 0 1px;
 	}
 
-	.abort {
+	&.abort {
 		border: 3px solid #f55a5a;
 	}
 
-	.save-changes {
+	&.save-changes {
 		border: 3px solid #56b93c;
 	}
 }
