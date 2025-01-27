@@ -2,7 +2,7 @@ import type { CustomProductType, ProductType } from '@/types/types';
 import { collection, deleteDoc, deleteField, doc, getDoc, getDocs, increment, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '@/firebase';
 import { v4 as uuid } from 'uuid';
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import { createProvider } from '@/utils/createProvider';
 import { useSort } from '@/hooks/useSort';
 

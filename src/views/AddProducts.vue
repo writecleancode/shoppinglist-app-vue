@@ -30,7 +30,7 @@ const initialProductState = {
 
 // setup():
 const { defaultProducts, updateCustomProductsQuantity } = useProductsContext();
-const productsToAdd = ref(defaultProducts);
+const productsToAdd = ref(defaultProducts.value);
 const customProduct = ref(initialProductState);
 const searchInputValue = ref('');
 
@@ -61,9 +61,12 @@ watch(
 	}
 );
 
-watch(customProduct, () => {
-	updateCustomProductsQuantity(customProduct.value);
-});
+watch(
+	() => customProduct.value.quantity,
+	() => {
+		updateCustomProductsQuantity(customProduct.value);
+	}
+);
 </script>
 
 <template>

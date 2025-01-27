@@ -5,27 +5,33 @@ import { useProductsContext } from '@/providers/ProductsProvider';
 const { initialProductState, setSearchInputValue, clearInput, setProductsToAdd, setCustomProduct } = defineProps({
 	initialProductState: {
 		type: Object,
+		required: true,
 	},
 	searchInputValue: {
 		type: String,
+		required: true,
 	},
 	setSearchInputValue: {
 		type: Function,
+		required: true,
 	},
 	clearInput: {
 		type: Function,
+		required: true,
 	},
 	setProductsToAdd: {
 		type: Function,
+		required: true,
 	},
 	setCustomProduct: {
 		type: Function,
+		required: true,
 	},
 });
 const { productsList } = useProductsContext();
 
 const updateProductsList = debounce((searchPhrase = '') => {
-	if (!searchPhrase) return setProductsToAdd(productsList);
+	if (!searchPhrase) return setProductsToAdd(productsList.value);
 
 	const matchingProducts = productsList.value.filter(product => product.name.toLowerCase().includes(searchPhrase.toLowerCase()));
 	setProductsToAdd(matchingProducts);
@@ -40,15 +46,16 @@ const handleCustomProduct = debounce((searchPhrase = '') => {
 	});
 }, 500);
 
-const handleInputChange = e => {
-	setSearchInputValue(e.target.value);
-	updateProductsList(e.target.value);
-	handleCustomProduct(e.target.value);
+const handleInputChange = (e: Event) => {
+	const target = e.target as HTMLInputElement;
+	setSearchInputValue(target.value);
+	updateProductsList(target.value);
+	handleCustomProduct(target.value);
 };
 
 const handleClearInputButton = () => {
 	clearInput();
-	setProductsToAdd(productsList);
+	setProductsToAdd(productsList.value);
 };
 </script>
 
@@ -61,7 +68,7 @@ const handleClearInputButton = () => {
 			type="text"
 			:value="searchInputValue"
 			@input="handleInputChange" />
-		<button class="clear-search-input-btn" @click="handleClearInputButton;" aria-label="clear input">
+		<button class="clear-search-input-btn" @click="handleClearInputButton" aria-label="clear input">
 			<img src="/icons/x-circle.svg" alt="" />
 		</button>
 	</div>

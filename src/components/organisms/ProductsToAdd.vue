@@ -65,22 +65,22 @@ const handleProductQuantity = (firestoreId: string, productId: number | string, 
 	updateProductsQuantity(firestoreId, productId, quantityChanger);
 };
 
-// watch(products, () => {
-// 	products.sort((a, b) => {
-// 		if (a.name.toLowerCase() < b.name.toLowerCase()) {
-// 			return -1;
-// 		} else if (a.name.toLowerCase() > b.name.toLowerCase()) {
-// 			return 1;
-// 		} else {
-// 			return 0;
-// 		}
-// 	});
-// });
+watch(() => products, () => {
+	products.sort((a, b) => {
+		if (a.name.toLowerCase() < b.name.toLowerCase()) {
+			return -1;
+		} else if (a.name.toLowerCase() > b.name.toLowerCase()) {
+			return 1;
+		} else {
+			return 0;
+		}
+	});
+});
 </script>
 
 <template>
 	<ul class="products-to-add-list">
-		<li v-if="customProduct.name !== ''" class="products-to-add-list-item" :key="-999">
+		<li v-if="customProduct.name !== ''" class="products-to-add-list-item" :key="-999" id="-999">
 			<button
 				class="add-product-btn"
 				@click="handleCustomProductQuantity(-999, 'increase')"
@@ -100,7 +100,7 @@ const handleProductQuantity = (firestoreId: string, productId: number | string, 
 				@click="handleCustomProductQuantity(-999, 'decrease')"
 				:aria-label="`decrease quantity of ${customProduct.name}`"></button>
 		</li>
-		<li v-for="(product, index) in products" class="products-to-add-list-item" :key="product.id">
+		<li v-for="(product, index) in products" class="products-to-add-list-item" :key="product.id" :id="product.id">
 			<button
 				class="add-product-btn"
 				@click="handleProductQuantity(product.firestoreId, product.id, index, 'increase')"
