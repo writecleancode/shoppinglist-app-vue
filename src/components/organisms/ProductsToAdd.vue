@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { computed, ref, watch, type PropType } from 'vue';
 import QuantityOfProduct from '../atoms/QuantityOfProduct.vue';
 import { useProductsContext } from '@/providers/ProductsProvider';
+import type { ProductType } from '@/types/types';
 
 const { products, clearInput, changePorudctsToAddQuantity, changeCustomProductQuantity } = defineProps({
 	products: {
-		type: Array,
+		type: Array as PropType<ProductType[]>,
+		required: true,
 	},
 	customProduct: {
 		type: Object,
@@ -17,9 +19,11 @@ const { products, clearInput, changePorudctsToAddQuantity, changeCustomProductQu
 	},
 	setProductsToAdd: {
 		type: Function,
+		required: true,
 	},
 	changePorudctsToAddQuantity: {
-		type: Function,
+		type: Function as PropType<(index: number, quantityChanger: 1 | -1) => void>,
+		required: true,
 	},
 	changeCustomProductQuantity: {
 		type: Function,
@@ -27,18 +31,18 @@ const { products, clearInput, changePorudctsToAddQuantity, changeCustomProductQu
 	},
 });
 
-let timeout;
+let timeout: number;
 
 // setup():
 const { updateProductsQuantity } = useProductsContext();
-const lastClickedProductId = ref(-1);
+const lastClickedProductId = ref<number | string>(-1);
 const quantityNumber = ref(-1); // used for plus icon rotate animation - to prevent animation after custom product is replaced by another
 
 const cssRotationDegreeValue = computed(() => {
 	`${quantityNumber.value * 180}deg`;
 });
 
-const handlePlusIconScale = productId => {
+const handlePlusIconScale = (productId: number | string) => {
 	lastClickedProductId.value = productId;
 	clearTimeout(timeout);
 	timeout = setTimeout(() => {
@@ -46,7 +50,7 @@ const handlePlusIconScale = productId => {
 	}, 500);
 };
 
-const handleCustomProductQuantity = (productId, direction) => {
+const handleCustomProductQuantity = (productId: number, direction: string) => {
 	const quantityChanger = direction === 'increase' ? 1 : -1;
 
 	handlePlusIconScale(productId);
@@ -83,7 +87,7 @@ watch(
 
 <template>
 	<ul class="products-to-add-list">
-		<li v-if="customProduct.name !== ''" class="products-to-add-list-item" :key="-999" id="-999">
+		<li v-if="customProduct.name !== ''" class="products-to-add-list-item" :key="-999">
 			<button
 				class="add-product-btn"
 				@click="handleCustomProductQuantity(-999, 'increase')"
@@ -103,7 +107,7 @@ watch(
 				@click="handleCustomProductQuantity(-999, 'decrease')"
 				:aria-label="`decrease quantity of ${customProduct.name}`"></button>
 		</li>
-		<li v-for="(product, index) in products" class="products-to-add-list-item" :key="product.id" :id="product.id">
+		<li v-for="(product, index) in products" class="products-to-add-list-item" :key="product.id">
 			<button
 				class="add-product-btn"
 				@click="handleProductQuantity(product.firestoreId, product.id, index, 'increase')"
