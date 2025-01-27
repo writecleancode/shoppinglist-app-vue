@@ -65,17 +65,20 @@ const handleProductQuantity = (firestoreId: string, productId: number | string, 
 	updateProductsQuantity(firestoreId, productId, quantityChanger);
 };
 
-watch(() => products, () => {
-	products.sort((a, b) => {
-		if (a.name.toLowerCase() < b.name.toLowerCase()) {
-			return -1;
-		} else if (a.name.toLowerCase() > b.name.toLowerCase()) {
-			return 1;
-		} else {
-			return 0;
-		}
-	});
-});
+watch(
+	() => products,
+	() => {
+		products.sort((a, b) => {
+			if (a.name.toLowerCase() < b.name.toLowerCase()) {
+				return -1;
+			} else if (a.name.toLowerCase() > b.name.toLowerCase()) {
+				return 1;
+			} else {
+				return 0;
+			}
+		});
+	}
+);
 </script>
 
 <template>

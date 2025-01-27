@@ -68,7 +68,12 @@ const handleClearInputButton = () => {
 			type="text"
 			:value="searchInputValue"
 			@input="handleInputChange" />
-		<button class="clear-search-input-btn" @click="handleClearInputButton" aria-label="clear input">
+		<button
+			class="clear-search-input-btn"
+			:class="{ active: searchInputValue.length > 0 }"
+			@click="handleClearInputButton"
+			aria-label="clear input"
+			:inert="!searchInputValue">
 			<img src="/icons/x-circle.svg" alt="" />
 		</button>
 	</div>
@@ -102,10 +107,17 @@ const handleClearInputButton = () => {
 	width: 24px;
 	height: 24px;
 	background-color: transparent;
+	opacity: 0;
+	pointer-events: none;
 	transition: opacity 0.15s;
 
 	&:hover {
 		opacity: 0.7;
+	}
+
+	&.active {
+		opacity: 1;
+		pointer-events: auto;
 	}
 }
 
