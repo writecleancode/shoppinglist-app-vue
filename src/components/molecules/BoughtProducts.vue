@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ProductListItem from '@/components/molecules/ProductListItem.vue';
 
-const props = defineProps({
+defineProps({
 	productsList: {
 		type: Object,
 		required: true,

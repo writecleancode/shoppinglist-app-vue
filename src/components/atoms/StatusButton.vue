@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import CheckIcon from '@/assets/icons/CheckIcon.vue';
 
-const props = defineProps({
+defineProps({
 	isBought: {
 		type: Boolean,
 		default: false,
