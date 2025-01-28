@@ -2,6 +2,7 @@
 import ContentOverlay from '@/components/atoms/ContentOverlay.vue';
 import CategoryIcon from '@/components/atoms/CategoryIcon.vue';
 
+import type { ProductType } from '@/types/types';
 import { useChangeCategoryContext } from '@/providers/useChangeCategory';
 import { useEditProductContext } from '@/providers/EditProductProvider';
 import { useProductsContext } from '@/providers/ProductsProvider';
@@ -20,7 +21,7 @@ const { isCategoryPanelOpen, openCategoryPanel } = useChangeCategoryContext();
 
 const handleInputChange = (e: Event) => {
 	const target = e.target as HTMLInputElement;
-	setEditedProductValue(target.name, target.value);
+	setEditedProductValue(target.name as keyof ProductType, target.value);
 };
 
 const handleQuantityChange = (e: Event) => {

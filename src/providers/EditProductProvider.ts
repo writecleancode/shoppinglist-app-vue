@@ -1,3 +1,4 @@
+import type { ProductType } from '@/types/types';
 import { createProvider } from '@/utils/createProvider';
 import { ref } from 'vue';
 
@@ -18,12 +19,12 @@ const initialEditState = {
 
 const useEditProduct = () => {
 	const isEditPanelOpen = ref(initialEditPanelState);
-	const editedProduct = ref(initialEditState);
+	const editedProduct = ref<ProductType>(initialEditState);
 
 	const openEditPanel = () => (isEditPanelOpen.value = true);
 	const closeEditPanel = () => (isEditPanelOpen.value = false);
 
-	const setEditedProduct = productToEdit => {
+	const setEditedProduct = (productToEdit: ProductType) => {
 		editedProduct.value = {
 			firestoreId: productToEdit.firestoreId,
 			id: productToEdit.id,
@@ -38,23 +39,23 @@ const useEditProduct = () => {
 		};
 	};
 
-	const setEditedProductValue = (inputName, inputValue) => {
+	const setEditedProductValue = <K extends keyof ProductType>(inputName: K, inputValue: ProductType[K]) => {
 		editedProduct.value[inputName] = inputValue;
 	};
 
-	const setProductsQuantity = newQuantity => {
-		editedProduct.value.quantity = newQuantity;
+	const setProductsQuantity = (newQuantity: number | string) => {
+		editedProduct.value.quantity = Number(newQuantity);
 	};
 
-	const changeProductsQuantity = quantityChanger => {
+	const changeProductsQuantity = (quantityChanger: 1 | -1) => {
 		editedProduct.value.quantity += quantityChanger;
 	};
 
-	const setProductsUnit = newUnit => {
+	const setProductsUnit = (newUnit: string) => {
 		editedProduct.value.unit = newUnit;
 	};
 
-	const setProductsCategory = (newCategoryName, newCategoryIcon) => {
+	const setProductsCategory = (newCategoryName: string, newCategoryIcon: string) => {
 		editedProduct.value.category.name = newCategoryName;
 		editedProduct.value.category.imgSrc = newCategoryIcon;
 	};

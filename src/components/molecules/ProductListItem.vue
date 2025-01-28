@@ -3,14 +3,15 @@ import StatusButton from '@/components/atoms/StatusButton.vue';
 import QuantityOfProduct from '@/components/atoms/QuantityOfProduct.vue';
 import CategoryIcon from '@/components/atoms/CategoryIcon.vue';
 
-import { ref } from 'vue';
+import type { ProductType } from '@/types/types';
+import { ref, type PropType } from 'vue';
 import { useProductsContext } from '@/providers/ProductsProvider';
 import { useEditProductContext } from '@/providers/EditProductProvider';
 import { useChangeCategoryContext } from '@/providers/useChangeCategory';
 
 const { product } = defineProps({
 	product: {
-		type: Object,
+		type: Object as PropType<ProductType>,
 		required: true,
 	},
 });

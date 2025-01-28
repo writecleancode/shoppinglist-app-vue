@@ -37,7 +37,7 @@ const hideAddProductView = () => (isAddProductActive.value = false);
 const handleClosePanels = (e: KeyboardEvent) => {
 	if (e.key !== 'Escape') return;
 
-	if (isCategoryPanelOpen) {
+	if (isCategoryPanelOpen.value) {
 		closeCategoryPanel();
 		return;
 	}
