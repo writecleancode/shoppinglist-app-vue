@@ -51,6 +51,7 @@ const handleChangeCategory = (clickedCategory: { name: string; imgSrc: string })
 
 <style lang="scss" scoped>
 @use '@/assets/styles/variables' as *;
+@use '@/assets/styles/category-bgcolors' as *;
 
 .content-overlay-bright {
 	display: none;
@@ -152,159 +153,11 @@ const handleChangeCategory = (clickedCategory: { name: string; imgSrc: string })
 			background-color: #f7f7f7;
 		}
 
-		&[data-category='alcohols and tobacco'] {
-			button {
-				background-color: #fff0f5;
-			}
-		}
-
-		&[data-category='first aid kit'] {
-			button {
-				background-color: #f8f2fe;
-			}
-		}
-
-		&[data-category='articles for animals'] {
-			button {
-				background-color: #f7f7f7;
-			}
-		}
-
-		&[data-category='baby articles'] {
-			button {
-				background-color: #f5f3fe;
-			}
-		}
-
-		&[data-category='bulk goods'] {
-			button {
-				background-color: #f5f7ec;
-			}
-		}
-
-		&[data-category='household chemicals'] {
-			button {
-				background-color: #ebfaf5;
-			}
-		}
-
-		&[data-category='cakes, desserts, additives'] {
-			button {
-				background-color: #fcf3ec;
-			}
-		}
-
-		&[data-category='convenience foods'] {
-			button {
-				background-color: #ebf9f9;
-			}
-		}
-
-		&[data-category='hygiene'] {
-			button {
-				background-color: #f5f3fe;
-			}
-		}
-
-		&[data-category='other'] {
-			button {
-				background-color: #f7f7f7;
-			}
-		}
-
-		&[data-category='coffee, tea, coco'] {
-			button {
-				background-color: #f5f5f5;
-			}
-		}
-
-		&[data-category='meat and cold cut'] {
-			button {
-				background-color: #f8f2fe;
-			}
-		}
-
-		&[data-category='frozen foods and ice cream'] {
-			button {
-				background-color: #f2f5fe;
-			}
-		}
-
-		&[data-category='dairy product'] {
-			button {
-				background-color: #f8f5ec;
-			}
-		}
-
-		&[data-category='garden and DI'] {
-			button {
-				background-color: #eef9f5;
-			}
-		}
-
-		&[data-category='baked goods'] {
-			button {
-				background-color: #fcf3ec;
-			}
-		}
-
-		&[data-category='preserves'] {
-			button {
-				background-color: #fcf1f9;
-			}
-		}
-
-		&[data-category='spices, sauces, additives'] {
-			button {
-				background-color: #fff0f5;
-			}
-		}
-
-		&[data-category='cereals and muesli'] {
-			button {
-				background-color: #f5f7ec;
-			}
-		}
-
-		&[data-category='fish'] {
-			button {
-				background-color: #eef7fe;
-			}
-		}
-
-		&[data-category='household appliances and electronics'] {
-			button {
-				background-color: #f4f8fb;
-			}
-		}
-
-		&[data-category='sweets and snack'] {
-			button {
-				background-color: #f0f6ea;
-			}
-		}
-
-		&[data-category='fats'] {
-			button {
-				background-color: #f5f7ec;
-			}
-		}
-
-		&[data-category='clothes'] {
-			button {
-				background-color: #ecf7ef;
-			}
-		}
-
-		&[data-category='vegetables and fruit'] {
-			button {
-				background-color: #fcf2f1;
-			}
-		}
-
-		&[data-category='water and drinks'] {
-			button {
-				background-color: #eef7fe;
+		@each $category, $color in $category-bgcolors {
+			&[data-category='#{$category}'] {
+				button {
+					background-color: $color;
+				}
 			}
 		}
 	}
