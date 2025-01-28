@@ -3,7 +3,7 @@ import ContentOverlay from '@/components/atoms/ContentOverlay.vue';
 import CategoryIcon from '@/components/atoms/CategoryIcon.vue';
 
 import type { ProductType } from '@/types/types';
-import { useChangeCategoryContext } from '@/providers/useChangeCategory';
+import { useChangeCategoryContext } from '@/providers/ChangeCategoryProvider';
 import { useEditProductContext } from '@/providers/EditProductProvider';
 import { useProductsContext } from '@/providers/ProductsProvider';
 

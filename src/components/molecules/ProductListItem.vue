@@ -7,7 +7,7 @@ import type { ProductType } from '@/types/types';
 import { ref, type PropType } from 'vue';
 import { useProductsContext } from '@/providers/ProductsProvider';
 import { useEditProductContext } from '@/providers/EditProductProvider';
-import { useChangeCategoryContext } from '@/providers/useChangeCategory';
+import { useChangeCategoryContext } from '@/providers/ChangeCategoryProvider';
 
 const { product } = defineProps({
 	product: {

@@ -4,7 +4,7 @@ import ContentOverlay from '@/components/atoms/ContentOverlay.vue';
 import { categories } from '@/data/categories';
 import { useProductsContext } from '@/providers/ProductsProvider';
 import { useEditProductContext } from '@/providers/EditProductProvider';
-import { useChangeCategoryContext } from '@/providers/useChangeCategory';
+import { useChangeCategoryContext } from '@/providers/ChangeCategoryProvider';
 
 const { updateProductCategory } = useProductsContext();
 const { setProductsCategory } = useEditProductContext();

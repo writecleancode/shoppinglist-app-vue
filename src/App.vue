@@ -3,7 +3,7 @@ import MainView from './views/MainView.vue';
 
 import { useProductsProvider } from '@/providers/ProductsProvider';
 import { useEditProductProvider } from './providers/EditProductProvider';
-import { useChangeCategoryProvider } from './providers/useChangeCategory';
+import { useChangeCategoryProvider } from './providers/ChangeCategoryProvider';
 
 useProductsProvider();
 useEditProductProvider();

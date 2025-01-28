@@ -15,7 +15,7 @@ import { db } from '@/firebase';
 import { onMounted, ref, watch } from 'vue';
 import { useProductsContext } from '@/providers/ProductsProvider';
 import { useEditProductContext } from '@/providers/EditProductProvider';
-import { useChangeCategoryContext } from '@/providers/useChangeCategory';
+import { useChangeCategoryContext } from '@/providers/ChangeCategoryProvider';
 
 const isAddProductActive = ref(false);
 const {
