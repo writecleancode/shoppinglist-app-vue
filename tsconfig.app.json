@@ -9,6 +9,6 @@
       "@/*": ["./src/*"]
     },
 
-    "lib": ["ESNext.Array", "ESNext"]
+    "lib": ["ESNext.Array", "DOM", "ESNext"]
   }
 }

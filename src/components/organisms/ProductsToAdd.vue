@@ -116,10 +116,7 @@ watch(
 				</div>
 				{{ product.name }}
 			</button>
-			<QuantityOfProduct :quantity="product.quantity">
-				{{ product.quantity }}
-				{{ product.quantity > 0 && product.unit }}
-			</QuantityOfProduct>
+			<QuantityOfProduct :quantity="product.quantity"> {{ product.quantity }}{{ product.quantity > 0 && product.unit }} </QuantityOfProduct>
 			<button
 				class="decrease-btn"
 				:class="{ active: product.quantity >= 0, 'decrease-active': product.quantity > 0 }"

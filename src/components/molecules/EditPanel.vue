@@ -45,7 +45,7 @@ const handleSaveChangesButton = () => {
 
 <template>
 	<ContentOverlay :isActive="isEditPanelOpen" @click="closeEditPanel" />
-	<div id="editPanel" class="edit-panel-wrapper" :class="{ active: isEditPanelOpen }" :inert="!isEditPanelOpen && isCategoryPanelOpen">
+	<div id="editPanel" class="edit-panel-wrapper" :class="{ active: isEditPanelOpen }" :inert="!isEditPanelOpen || isCategoryPanelOpen">
 		<div class="control-changes-buttons-wrapper">
 			<button class="control-changes-btn abort" @click="closeEditPanel">
 				<img src="/icons/arrow-left-small.svg" alt="" />
